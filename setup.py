@@ -16,7 +16,6 @@ extra_test = [
 ]
 
 extra_dev = [
-	*extra_math,
 	*extra_test,
 ]
 
