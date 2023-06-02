@@ -1,1 +1,2 @@
-# ancestry
+# ancestry-informative SNP scAI-SNP
+
