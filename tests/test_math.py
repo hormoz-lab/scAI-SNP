@@ -1,6 +1,6 @@
 import random
 
-from scAI_SNP.math import center, div_int, cmd_center
+from scAI_SNP.math import center, div_int, cmd_center, read_validate
 
 
 def test_center():
@@ -23,3 +23,6 @@ def test_cmd_center(capsys):
     captured = capsys.readouterr()
     assert captured.out == '-2.0\n-1.2\n'
     assert captured.err == ''
+
+def test_read_validate():
+	assert 1 == 1
