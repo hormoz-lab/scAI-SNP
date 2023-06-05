@@ -26,4 +26,6 @@ def classify(input):
 	print(f"the input had {np.nanmean(col_input)} average")
 	print(f"the output had {np.nanmean(col_center)} average")
 
+
+
 	return None
