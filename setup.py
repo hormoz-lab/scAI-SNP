@@ -45,7 +45,7 @@ setup(
 	entry_points={
 		'console_scripts': [
 			'center=scAI_SNP.math:cmd_center',
-			'classify=scAI_SNP.commands:classify'
+			'classify=scAI_SNP.commands:cmd_classify'
 		],
 	},
 )
