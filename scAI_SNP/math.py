@@ -2,12 +2,13 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-from returns import returns
+#from returns import returns
 
 # variables and constants
 n_mut = 4586890
 
-@returns(int)
+#@returns(int)
+
 def div_int(x, y):
     return x / y
 
