@@ -52,7 +52,7 @@ def classify(input):
 	print(f"shape of scores {scores.shape}")
 	print(f"shape of decision {decision.shape}"
 	
-	return(None)
+	#return(None)
 
 	#return {'probabilities': ,
 	#	'population': softmax(decision, copy = False}
