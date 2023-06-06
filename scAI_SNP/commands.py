@@ -1,6 +1,8 @@
 import typer
 import numpy as np
 import pandas as pd
+import time
+import matplotlib.pyplot as plt
 
 from scAI_SNP.math import read_center
 from scAI_SNP.math import read_validate
@@ -14,7 +16,7 @@ app = typer.Typer(
 
 @app.command(short_help="classify the data")
 def classify(input):
-
+	now = time.time()
 	print(f"input file name: {input}")
 
 	col_mean = read_center()
@@ -26,36 +28,49 @@ def classify(input):
 	col_center[mask] = col_mean[mask]
 
 	print(f"input has {np.sum(np.isnan(col_input))} NA values")
-	print(f"centered input has {np.sum(np.isnan(col_center))} NA values")
-
-	print(f"input has {np.nanmean(col_input)} average")
-	print(f"centered input has {np.nanmean(col_center)} average")
-	print(f"SUCCESS: centering complete!")
-
+	print("SUCCESS: centering complete!")
+	
+	print("reading LDA projection matrix...")
 	mat_proj_lda = pd.read_csv('data/proj_lda.tsv.gz', sep = '\t', compression = 'gzip', header = None).values
-	print(f"the shape of mat_proj is {mat_proj_lda.shape}")
+	print("SUCCESS: projection matrix loaded!")
+	print("applying classification...")	
 
 	lda_proj_input = col_center.T @ mat_proj_lda
-	print(f"the shape of projected input is {lda_proj_input.shape}")
-	print(f"average is {np.mean(lda_proj_input, axis = 0)}")
-	print(f"average is {np.mean(lda_proj_input, axis = 1)}")
 	
-	coef_lr = pd.read_csv('model/LR/LR_coef.tsv', sep = '\t', header = None).values
-	intercept_lr = pd.read_csv('model/LR/LR_intercept.tsv', sep = '\t', header = None).values
+	coef_lr = pd.read_csv('model/LR/LR_coef.tsv', sep = '\t', header = None).to_numpy()
+	intercept_lr = pd.read_csv('model/LR/LR_intercept.tsv', sep = '\t', header = None).to_numpy()
+	vec_population = pd.read_csv('model/LR/population.tsv', header = None).to_numpy()
 	
-	print(f"shape of coef_lr: {coef_lr.shape}")
-	print(f"shape of intercept_lr: {intercept_lr.shape}")
-	
-	scores = safe_sparse_dot(coef_lr, lda_proj_input.T, dense_output = True) + intercept_lr
-	decision = scores.reshape(1, -1)
+	scores = lda_proj_input @ coef_lr.T + intercept_lr.T
+	scores = scores.to_numpy()
+	index_max = np.argmax(scores[0])
+	prob = np.exp(scores[0]) / np.sum(np.exp(scores[0]), axis = 0)
 
-	print(f"shape of scores {scores.shape}")
-	print(f"shape of decision {decision.shape}"
-	
-	#return(None)
+	print(f"population: {vec_population[index_max]}")
+	print(f"max index: {index_max}")
+	print(f"prob: {prob[index_max]}")
 
-	#return {'probabilities': ,
-	#	'population': softmax(decision, copy = False}
+	print("SUCCESS: classification done!")
+	print(f"classify took {round((time.time() - now)/60, 2)} minutes")
+	print("plotting and saving probabilities...")
+
+	df_prob = pd.DataFrame(prob.reshape(1, -1), columns = vec_population)
+	df_prob.T.plot(kind = 'bar', color = ['red'], figsize = (16, 10))
+	plt.legend(['Input'], loc = 'upper right',
+		fontsize = 20)
+	plt.title('Population Probabilities of the Input using LR classification \n(post PCA-LDA transformation)',
+		fontsize = 25)
+	plt.xlabel('populations', fontsize = 20)
+	plt.ylabel('probabilities', fontsize = 20)
+	plt.tick_params(axis = 'both', which = 'major', labelsize = 20)
+
+	path_plot = 'output/figure/'
+	plt.savefig(path_plot + 'probabilities.jpg')
+	plt.show()
+	print("SUCCESS: plot saved!")
+
+	return None
+
 
 def cmd_classify(args=None):
 	import argparse
@@ -64,6 +79,3 @@ def cmd_classify(args=None):
 	parsed_args = parser.parse_args(args)
 	
 	classify(parsed_args.input_file)
-
-#if __name__ == '__main__':
-#	cmd_classify()
