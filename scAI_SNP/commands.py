@@ -1,4 +1,4 @@
-import typer
+#import typer
 import numpy as np
 import pandas as pd
 import time
@@ -9,12 +9,12 @@ from scAI_SNP.math import read_validate
 from scAI_SNP.math import safe_sparse_dot
 
 
-app = typer.Typer(
-	help = "Command line tool to extract genetic population classification of mutation data "
-		"using HGDP project"
-)
+#app = typer.Typer(
+#	help = "Command line tool to extract genetic population classification of mutation data "
+#		"using HGDP project"
+#)
 
-@app.command(short_help="classify the data")
+#@app.command(short_help="classify the data")
 def classify(input):
 	now = time.time()
 	print(f"input file name: {input}")
