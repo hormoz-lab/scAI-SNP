@@ -1,16 +1,16 @@
 from setuptools import setup, find_packages
 from scAI_SNP import __version__
 
-extra_math = [
+extra_helper = [
 	'returns-decorator',
 ]
 
 extra_bin = [
-	*extra_math,
+	*extra_helper,
 ]
 
 extra_test = [
-	*extra_math,
+	*extra_helper,
 	'pytest>=4',
 	'pytest-cov>=2',
 ]
@@ -35,7 +35,7 @@ setup(
 	packages=find_packages(exclude=['tests', 'tests.*']),
 
 	extras_require={
-		'math': extra_math,
+		'helper': extra_helper,
 		'bin': extra_bin,
 		'test': extra_test,
 		'dev': extra_dev,
@@ -44,8 +44,8 @@ setup(
 
 	entry_points={
 		'console_scripts': [
-			'center=scAI_SNP.math:cmd_center',
-			'classify=scAI_SNP.commands:cmd_classify'
+			'center=scAI_SNP.helper:cmd_center',
+			'scAI_SNP_classify=scAI_SNP.commands:cmd_classify'
 		],
 	},
 )

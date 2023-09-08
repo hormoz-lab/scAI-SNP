@@ -4,9 +4,9 @@ import pandas as pd
 import time
 import matplotlib.pyplot as plt
 
-from scAI_SNP.math import read_center
-from scAI_SNP.math import read_validate
-from scAI_SNP.math import safe_sparse_dot
+from scAI_SNP.helper import read_center
+from scAI_SNP.helper import read_validate
+from scAI_SNP.helper import safe_sparse_dot
 
 
 #app = typer.Typer(
@@ -17,6 +17,7 @@ from scAI_SNP.math import safe_sparse_dot
 #@app.command(short_help="classify the data")
 def classify(input):
 	now = time.time()
+	print(f"starting ancestry classification for scAI-SNP")
 	print(f"input file name: {input}")
 
 	col_mean = read_center()

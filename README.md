@@ -18,3 +18,19 @@ Because this repository includes large files (over 100MB), using scAI-SNP requir
 6. use command `git lfs install` to apply git-lfs to the repository
 7. use command `git lfs ls-files` to make sure the large files of the repository are listed in the terminal output
 8. use command `git lfs pull` to convert git-lfs tagged files to their full size (this will download about ~1.2GB of memory)
+
+### installation of scAI-SNP
+
+1. 
+
+pip install scAI_SNP
+
+or
+
+git clone
+cd scAI_SNP
+pip install .
+
+## running the classification
+
+scAI_SNP_classify <input_genotype_file> <input_name_file>

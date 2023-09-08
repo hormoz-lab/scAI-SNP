@@ -1,6 +1,6 @@
 import random
 
-from scAI_SNP.math import center, div_int, cmd_center, read_validate, read_center
+from scAI_SNP.helper import center, div_int, cmd_center, read_validate, read_center
 
 
 def test_center():
