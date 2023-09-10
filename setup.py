@@ -33,6 +33,7 @@ setup(
 	author_email='hongdavid852@gmail.com',
 
 	packages=find_packages(exclude=['tests', 'tests.*']),
+	install_requires=['typer==0.4.2'],
 
 	extras_require={
 		'helper': extra_helper,
