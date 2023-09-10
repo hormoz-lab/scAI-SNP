@@ -40,7 +40,9 @@ def read_validate(file):
 			'"1"': 1, 
 			'"1.0"': 1, 
 			'"0.5"': 0.5, 
-			'NA': np.nan
+			'NA': np.nan,
+			'Na': np.nan,
+			'na': np.nan
 		}, inplace=True
 	)
 
