@@ -5,10 +5,9 @@
 
 ## installation
 
-Because this repository includes large files (over 100MB), using scAI-SNP requires installation of [git-lfs](https://git-lfs.com/). Here is the link that can direct you to the installation [instructions](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=installation_link&utm_campaign=gitlfs#installing). Here are some helpful instructions.
+Because this repository includes large files (over 100MB), you may use [git-lfs](https://git-lfs.com/) to install these large files in the repository. Here is the link that can direct you to the installation [instructions](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=installation_link&utm_campaign=gitlfs#installing). Here are some helpful instructions.
 
-### installation of git-lfs
-#### linux
+### Step 1A (you may instead do Step 1B): installation of git-lfs
 
 1. install the appropriate binary package in this [list](https://github.com/git-lfs/git-lfs/releases) under "Assets"
 2. untar the file and move the folder to an appropriate path of your choice
@@ -18,6 +17,10 @@ Because this repository includes large files (over 100MB), using scAI-SNP requir
 6. use command `git lfs install` to apply git-lfs to the repository
 7. use command `git lfs ls-files` to make sure the large files of the repository are listed in the terminal output
 8. use command `git lfs pull` to convert git-lfs tagged files to their full size (this will download about ~1.2GB of memory)
+
+### Step 1B (instead of following Step 1A): download large files using dropbox links
+
+
 
 ### installation of scAI-SNP
 
