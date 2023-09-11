@@ -49,6 +49,8 @@ the reduced dimensions would then be applied to a logistic regression model that
 ```{bash}
 scAI_SNP_classify <input_genotype_file> --name_input <input_name_file> --bool_save_plot <True or False>
 ```
+running the command above would produce probabilities of the samples belonging into the 26 groups. The `name_input` and `bool_save_plot` are optional parameters but you must provide the `input_genotype_file`
+
 ### File Format
 #### <input_genotype_file>
 `input_genotype_file` must be a tab-separated text file of exactly 4.5 million (4,586,890 genotypes) rows which would correspond, in order, to the genotypes of 4.5 million SNPs [here](https://www.dropbox.com/scl/fi/65sn4qinedwsd6sh6eu4f/snp_meta_4.5M.col?rlkey=ncscgtr4p65ll46itn9fjkvy9&dl=0) of your input. There **must be no header row** and you may have multiple columns of the data in which multiple columns correspond to multiple samples. Each entry of the genotype must be `{NA, 0, 0.5, 1}`, which represents missing genotype, homozygous reference, heterozygous mutation, and homozygous mutation genotype. 
@@ -61,3 +63,8 @@ For example, for these three SNPs listed, '1:13649:G:C', '1:13868:A:G', and '1:1
 #### <bool_save_plot>
 `bool_save_plot` is an optional parameter that controls where the command would create a resulting plot or not. It is recommended to generate your plot using the probability output if you have more than 8 samples as the plot will not be able to scale well with more than 8 samples. The plot will be a bar plot of probabilities of the samples belonging to the 26 population groups.
 
+### Output
+#### Probabilities in table
+The output will be saved on `scAI_SNP/output` and there are one or two files that will result from running `scAI_SNP_classify`. You will always get a probability text file `scAI_SNP/output/probabilities.tsv` which will have 26 rows (excluding the header) of probabilities, corresponding to the alphabetically listed 26 population groups. The header row will either show the default or the input name you had provided, corresponding to the sample names. The file will have as many columns and the number of columns of the `input_genotype_file` you had provided.
+#### Probabilities in barplot
+The barplot will be saved on `scAI_SNP/output/figure/probabilities.jpg` and will show a probability bar plot. In the x-axis, represented are the 26 population groups, which are also colored based on which continent (African, American, East Asian, European, and South Asian) the group is from. As mentioned before, the number of samples should not exceed 8 as the plot does not scale well with high number of samples. You may generate your own plot using the probability text file.
