@@ -7,7 +7,13 @@
 
 Because this repository includes large files (over 100MB), you may use [git-lfs](https://git-lfs.com/) to install these large files in the repository. Here is the link that can direct you to the installation [instructions](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=installation_link&utm_campaign=gitlfs#installing). Here are some helpful instructions.
 
-### Step 1A (you may instead do Step 1B): installation of git-lfs
+### Step 1: installation of scAI-SNP
+
+```bash
+git clone https://github.com/hongdavid94/scAI_SNP.git
+```
+
+### Step 2A (you may instead do Step 2B): installation of git-lfs
 
 1. install the appropriate binary package in this [list](https://github.com/git-lfs/git-lfs/releases) under "Assets"
 2. untar the file and move the folder to an appropriate path of your choice
@@ -18,11 +24,12 @@ Because this repository includes large files (over 100MB), you may use [git-lfs]
 7. use command `git lfs ls-files` to make sure the large files of the repository are listed in the terminal output
 8. use command `git lfs pull` to convert git-lfs tagged files to their full size (this will download about ~1.2GB of memory)
 
-### Step 1B (instead of following Step 1A): download large files using dropbox links
+### Step 2B (instead of following Step 2A): download large files using dropbox links
+
+Use the following dropbox link to download the large files needed for the package [link](https://www.dropbox.com/sh/t8asohtbg6y8y8i/AABgztiVy4LlZ5DEwR4UZLi_a?dl=0). Anyone with the link can download the files. Make sure all the files are located probably such that
+data/ and model/ files are in your scAI_SNP folder
 
 
-
-### installation of scAI-SNP
 
 1. 
 
