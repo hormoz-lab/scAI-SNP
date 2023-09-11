@@ -2,7 +2,8 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-#from returns import returns
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 
 # variables and constants
 n_mut = 4586890
@@ -25,10 +26,9 @@ def cmd_center(args=None):
 
 # a function that reads a file
 def read_validate(file):
+	print(f"reading input file from {file}")
 	df = pd.read_csv(file, header = None, sep = '\t', encoding='utf-8', dtype=str)
-	print(df)
-	print(type(df))
-	print(df.shape)
+	
 	# checking number of rows
 	if df.shape[0] != n_mut:
 		print(f"ERROR (INPUT): The number of rows is not {n_mut}, but {df.shape[0]}")
@@ -55,7 +55,7 @@ def read_validate(file):
 
 	all_values = df.values.flatten()
 	# checking the values
-	print('all values')
+	print(f"printing all unique values in the input:")
 	print(pd.unique(all_values))
 	# file conversion to numpy
 	data_values = df.values.astype(float)
@@ -72,7 +72,8 @@ def read_validate(file):
 		invalid_values = data_values[mask_not_allowed]
 		print(f"ERROR (INPUT): Found invalid values: {invalid_values}, entries must be {0, 0.5, 1, 'NA'}")
 		print(f"function classify will now terminate, please review the input file")
-		# return None TEMP
+	else:
+		print("SUCCESS: all input values are valid")
 	
 	return data_values
 
@@ -127,47 +128,76 @@ def get_name_input(input, name_input, n_sample):
 		vec_name_input = df_string.iloc[:n_sample, 0].to_list()
 	return vec_name_input
 
-# a function from scikit-learn-1.2.0/sklearn/utils/extmath.py
-def safe_sparse_dot(a, b, *, dense_output=False):
-    """Dot product that handle the sparse matrix case correctly.
+def save_prob_plot(df_prob, vec_name_input, n_sample):
+	# data objects needed for plotting
+	vec_pop_ordered = ['ACB','ASW','ESN','GWD','LWK',
+					'MSL','YRI','CLM','MXL','PEL',
+					'PUR','CDX','CHB','CHS','JPT',
+					'KHV','CEU','FIN','GBR','IBS',
+					'TSI','BEB','GIH','ITU','PJL',
+					'STU']
 
-    Parameters
-    ----------
-    a : {ndarray, sparse matrix}
-    b : {ndarray, sparse matrix}
-    dense_output : bool, default=False
-        When False, ``a`` and ``b`` both being sparse will yield sparse output.
-        When True, output will always be a dense array.
+	df_meta_unique = pd.DataFrame({
+		'SUP': vec_pop_ordered,
+		'POP': ['AFR'] * 7 + ['AMR'] * 4 + ['EAS'] * 5 + ['EUR'] * 5 + ['SAS'] * 5
+	})
 
-    Returns
-    -------
-    dot_product : {ndarray, sparse matrix}
-        Sparse if ``a`` and ``b`` are sparse and ``dense_output=False``.
-    """
-    if a.ndim > 2 or b.ndim > 2:
-        if sparse.issparse(a):
-            # sparse is always 2D. Implies b is 3D+
-            # [i, j] @ [k, ..., l, m, n] -> [i, k, ..., l, n]
-            b_ = np.rollaxis(b, -2)
-            b_2d = b_.reshape((b.shape[-2], -1))
-            ret = a @ b_2d
-            ret = ret.reshape(a.shape[0], *b_.shape[1:])
-        elif sparse.issparse(b):
-            # sparse is always 2D. Implies a is 3D+
-            # [k, ..., l, m] @ [i, j] -> [k, ..., l, j]
-            a_2d = a.reshape(-1, a.shape[-1])
-            ret = a_2d @ b
-            ret = ret.reshape(*a.shape[:-1], b.shape[1])
-        else:
-            ret = np.dot(a, b)
-    else:
-        ret = a @ b
+	vec_sup_full = ['African Ancestry', 
+					'American Ancestry', 
+					'East Asian Ancestry', 
+					'European Ancestry', 
+					'South Asian Ancestry']
 
-    if (
-        sparse.issparse(a)
-        and sparse.issparse(b)
-        and dense_output
-        and hasattr(ret, "toarray")
-    ):
-        return ret.toarray()
-    return ret
+	vec_sup = ['AFR', 'AMR', 'EAS', 'EUR', 'SAS']
+
+	dict_color_super = {
+		'AFR': '#FBB6B1',
+		'AMR': '#C8C967',
+		'EAS': '#47D1A0',
+		'EUR': '#76D4F9',
+		'SAS': '#F0A0F7'}
+
+	colors_bar = plt.cm.viridis(np.linspace(0, 1, n_sample))
+	df_prob_plot = df_prob.T[vec_pop_ordered].T
+	ax = df_prob_plot.plot(
+		kind = 'bar', 
+		color = colors_bar,
+		figsize = (20, 10))
+		
+	plt.title('Population Probabilities of the Input using LR classification \n(post PCA-LDA transformation)',
+		fontsize = 30)
+	plt.xlabel('populations', fontsize = 20)
+	plt.ylabel('probabilities', fontsize = 20)
+	plt.tick_params(axis = 'both', which = 'major', labelsize = 20)
+
+	# get handles and labels for the subpopulation
+	handles_sub, labels_sub = ax.get_legend_handles_labels()
+
+	# create handles and labels for the population at continent level
+	handles_pop = [patches.Rectangle((0,0),1,1, color=dict_color_super[region_i]) for region_i in vec_sup]
+		
+	handles = handles_sub + handles_pop
+		
+	# create legends
+	## legened for the subpopulation
+	legend_bar = ax.legend(handles, vec_name_input, 
+						loc='upper left', fontsize=20, bbox_to_anchor = (1,1))
+	legend_bar.set_title("Legend (Bar)", prop={"size": 25}) 
+	ax.add_artist(legend_bar)
+
+	## legend for the continent
+	for label in ax.get_xticklabels():  
+		pop_temp = label.get_text()
+		color_temp = dict_color_super[df_meta_unique[df_meta_unique['SUP'] == pop_temp]['POP'].values[0]]
+		label.set_bbox(dict(facecolor = color_temp, edgecolor='None', alpha=0.5))
+
+	legend_box = ax.legend(handles_pop, vec_sup_full, 
+						loc = 'lower left', bbox_to_anchor = (1, 0), fontsize = 20)
+	legend_box.set_title("Legend (Population)", prop={"size": 25})
+	ax.add_artist(legend_box)
+	
+	plt.tight_layout()
+	path_plot = 'output/figure/'
+	plt.savefig(path_plot + 'probabilities.jpg', bbox_inches = 'tight', pad_inches = 0.5)
+	# plt.show()
+	print("SUCCESS: plot saved!")
