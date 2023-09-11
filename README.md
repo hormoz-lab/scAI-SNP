@@ -36,6 +36,14 @@ Use the following dropbox link to download the large files needed for the packag
 data/ and model/ files are in your scAI_SNP folder
 
 ## running the classification
+### Overview
+the classification will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper
+#### data-processing
+the data will be centered by the mean genotype of the training data such that all the missing genotypes will be non-informative to the model and that the other genotypes are centerred appropriatly for the subsequent steps. 
+#### dimension reduction
+the centered data will also be going through dimension reduction through PCA, condensing 4.5M rows of data into 1,000 rows by using the first 1000 PCs. Afterwards, LDA will be conducted to further reduce the dimensions into 25 to maximize the differences across the 26 population groups. The model was created using the training dataset and this github repository conducts the dimension reduction by multiplying the centered input by the composite projection matrix that will do both PCA and LDA simulatneously. The data will also be scaled by multiplying a scalar, inverse of present genotype data (if only 10% genotypes are present in the input, the components will be multiplied by `1/0.1` or `10` to account for missing data). 
+#### classification
+the reduced dimensions would then be applied to a logistic regression model that outputs the probabilities that the sample belongs to any of the 26 groups.
 
 ### Command Line Interface
 ```{bash}
@@ -48,5 +56,8 @@ scAI_SNP_classify <input_genotype_file> --name_input <input_name_file> --bool_sa
 For example, for these three SNPs listed, '1:13649:G:C', '1:13868:A:G', and '1:14464:A:T', correspond to SNPs at chromosome 1 at position 13649, 13868, and 14464, respectively (using the Human genome reference GRCh38 or hg38). For a sample, if the read of the first SNP is G/G, then the genotype would be homozygous reference because both match the reference and its corresponding data value would be 0. For the second SNP, if the observed genotype is A/G, then the corresponding data value would be 0.5. And if the genotype of the third SNP is not obtainable, then the corresponding data value must be `'NA'`. To reiterate, all data values in `input_genotype_file` must be `{NA, 0, 0.5, 1}` with allowing exceptions of `{Na, na, NaN, nan}` as `NA`, `{-0, 0.0, -0.0}` as `0`, `{1.0}` as `1`.
 
 #### <input_name_file>
-`input_name_file` is an optional parameter and a text file in which you can specify the name of the sample. For each column of `input_genotype_file`, from left to right, you can write down the sample name for each row. If the number of rows in `input_name_file` and the number of columns in `input_genotype_file` do not match, this parameter will be ignored and a default naming will be given. The default name would be the file name of `input_genotype_file` followed by `_#` where `#` will range from 1 to the number of samples (columns in `input_genotype_file`).
+`input_name_file` is an optional parameter and a text file in which you can specify the name of the sample. For each column of `input_genotype_file`, from left to right, you can write down the sample name for each row. If the number of rows in `input_name_file` and the number of columns in `input_genotype_file` do not match or if this input is not given, this parameter will be ignored and a default naming will be given. The default name would be the file name of `input_genotype_file` followed by `_#` where `#` will range from 1 to the number of samples (columns in `input_genotype_file`).
+
+#### <bool_save_plot>
+`bool_save_plot` is an optional parameter that controls where the command would create a resulting plot or not. It is recommended to generate your plot using the probability output if you have more than 8 samples as the plot will not be able to scale well with more than 8 samples. The plot will be a bar plot of probabilities of the samples belonging to the 26 population groups.
 
