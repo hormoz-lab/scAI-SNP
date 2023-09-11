@@ -40,13 +40,6 @@ def classify(file_input, name_input = None, bool_save_plot = True):
 	# centering the input data and count the number of missing values
 	mat_input_centered_scaled, vec_n_missing = center_scale_input(mat_input, col_mean)
 
-	# script when the input can only be one column
-	# centered column that ignores NA (np.nan)
-	# col_center = col_input - col_mean
-	# mask = np.isnan(col_center)
-	# col_center[mask] = col_mean[mask]
-	
-
 	print(f"input has {n_sample} samples (columns)")
 	print(f"each sample is missing {np.around(vec_n_missing/n_mut * 100, 2)} % genotypes")
 	print("SUCCESS: centering complete!")
@@ -106,19 +99,3 @@ def cmd_classify(args=None):
 	parsed_args = parser.parse_args(args)
 	
 	classify(parsed_args.file_input, parsed_args.name_input, parsed_args.bool_save_plot)
-
-#import os
-#path_working = '/homes1/shong/tool/scAI_SNP/'
-#os.chdir(path_working)
-#print(os.getcwd())
-
-#vec_input_uncenter = ['210521_white_MNC', '211008_asian_MNC', '211102_indian_old', '220111_asian_MNC', 'ET1_scRNA_190114', 'ET1_vcf', 'ET1_WGS', 'ET2_scRNA_190311_old', 'ET2_WGS']
-#for sample in vec_input_uncenter:
-#	uncenter('/homes1/shong/tool/scAI_SNP/data/vec_bone-marrow_4.5M/genotype_' + sample + '.col')
-
-# classify('/homes1/shong/tool/scAI_SNP/data/genotype_test_mixed.col')
-# classify('/homes1/shong/tool/scAI_SNP/data/genotype_two_col.tsv')
-#result = classify(
-#	'/homes1/shong/tool/scAI_SNP/data/genotype_combined_v4.tsv',
-#	name_input = '/homes1/shong/tool/scAI_SNP/data/sample_input_name.txt')
-# classify('/homes1/shong/tool/scAI_SNP/data/vec_bone-marrow_4.5M_uncentered/genotype_210521_white_MNC.col')
