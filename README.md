@@ -37,4 +37,16 @@ data/ and model/ files are in your scAI_SNP folder
 
 ## running the classification
 
-scAI_SNP_classify <input_genotype_file> --<input_name_file>
+### Command Line Interface
+```{bash}
+scAI_SNP_classify <input_genotype_file> --name_input <input_name_file> --bool_save_plot <True or False>
+```
+### File Format
+#### <input_genotype_file>
+`input_genotype_file` must be a tab-separated file of exactly 4.5 million (4,586,890 genotypes) rows which would correspond, in order, to the genotypes of 4.5 million SNPs [here](https://www.dropbox.com/scl/fi/65sn4qinedwsd6sh6eu4f/snp_meta_4.5M.col?rlkey=ncscgtr4p65ll46itn9fjkvy9&dl=0) of your input. There **must be no header row** and you may have multiple columns of the data in which multiple columns correspond to multiple samples. Each entry of the genotype must be `{NA, 0, 0.5, 1}`, which represents missing genotype, homozygous reference, heterozygous mutation, and homozygous mutation genotype. 
+
+For example, for these three SNPs listed, '1:13649:G:C', '1:13868:A:G', and '1:14464:A:T', correspond to SNPs at chromosome 1 at position 13649, 13868, and 14464, respectively (using the Human genome reference GRCh38 or hg38). For a sample, if the read of the first SNP is G/G, then the genotype would be homozygous reference because both match the reference and its corresponding data value would be 0. For the second SNP, if the observed genotype is A/G, then the corresponding data value would be 0.5. And if the genotype of the third SNP is not obtainable, then the corresponding data value must be `'NA'`. To reiterate, all data values in `input_genotype_file` must be `{NA, 0, 0.5, 1}` with allowing exceptions of `{Na, na, NaN, nan}` as `NA`, `{-0, 0.0, -0.0}` as `0`, `{1.0}` as `1`.
+
+#### <>
+
+
