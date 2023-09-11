@@ -24,6 +24,10 @@ extra_ci = [
 	'python-coveralls',
 ]
 
+# Read requirements.txt content
+with open("requirements.txt", "r") as f:
+    requirements = f.read().splitlines()
+
 setup(
 	name='scAI_SNP',
 	version=__version__,
