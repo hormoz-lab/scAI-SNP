@@ -7,10 +7,16 @@
 
 Because this repository includes large files (over 100MB), you may use [git-lfs](https://git-lfs.com/) to install these large files in the repository. Here is the link that can direct you to the installation [instructions](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=installation_link&utm_campaign=gitlfs#installing). Here are some helpful instructions.
 
+### Step 0: Make sure you have the prerequisites 
+- pip
+- python 3.7+
+
 ### Step 1: installation of scAI-SNP
 
-```bash
+```{bash}
 git clone https://github.com/hongdavid94/scAI_SNP.git
+cd scAI_SNP
+pip install .
 ```
 
 ### Step 2A (you may instead do Step 2B): installation of git-lfs
@@ -29,18 +35,6 @@ git clone https://github.com/hongdavid94/scAI_SNP.git
 Use the following dropbox link to download the large files needed for the package [link](https://www.dropbox.com/sh/t8asohtbg6y8y8i/AABgztiVy4LlZ5DEwR4UZLi_a?dl=0). Anyone with the link can download the files. Make sure all the files are located probably such that
 data/ and model/ files are in your scAI_SNP folder
 
-
-
-1. 
-
-pip install scAI_SNP
-
-or
-
-git clone
-cd scAI_SNP
-pip install .
-
 ## running the classification
 
-scAI_SNP_classify <input_genotype_file> <input_name_file>
+scAI_SNP_classify <input_genotype_file> --<input_name_file>
