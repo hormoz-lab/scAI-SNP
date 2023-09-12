@@ -47,7 +47,7 @@ the reduced dimensions would then be applied to a logistic regression model that
 
 ### Command Line Interface
 ```{bash}
-scAI_SNP_classify <input_genotype_file> --name_input <input_name_file> --bool_save_plot <True or False>
+scAI_SNP_classify <input_genotype_file> <output_directory> --name_input <input_name_file> --bool_save_plot <True or False>
 ```
 running the command above would produce probabilities of the samples belonging into the 26 groups. The `name_input` and `bool_save_plot` are optional parameters but you must provide the `input_genotype_file`
 
@@ -64,11 +64,12 @@ For example, for these three SNPs listed, '1:13649:G:C', '1:13868:A:G', and '1:1
 `bool_save_plot` is an optional parameter that controls where the command would create a resulting plot or not. It is recommended to generate your plot using the probability output if you have more than 8 samples as the plot will not be able to scale well with more than 8 samples. The plot will be a bar plot of probabilities of the samples belonging to the 26 population groups.
 
 ### Output
-More details about the three letter population code (e.g ACB) can be found in a tab-separated file `data/meata_population_summarized.tsv`
+More details about the three letter population code (e.g ACB) can be found in a tab-separated file `data/meata_population_summarized.tsv`. The output will be saved in <output_directory> and if such directory does not exist, it will be made along with its parent directories. **The filenames do not change so make sure to specify a different output directory for each run of your samples**.
+
 #### Probabilities in table
-The output will be saved on `scAI_SNP/output` and there are one or two files that will result from running `scAI_SNP_classify`. You will always get a probability text file `scAI_SNP/output/probabilities.tsv` which will have 26 rows (excluding the header) of probabilities, corresponding to the alphabetically listed 26 population groups. The header row will either show the default or the input name you had provided, corresponding to the sample names. The file will have as many columns and the number of columns of the `input_genotype_file` you had provided.
+The output will be saved on your given `<output_directory>` and there are one or two files that will result from running `scAI_SNP_classify`. You will always get a probability text file `<output_directory>/probabilities.tsv` which will have 26 rows (excluding the header) of probabilities, corresponding to the alphabetically listed 26 population groups. The header row will either show the default or the input name you had provided, corresponding to the sample names. The file will have as many columns and the number of columns of the `input_genotype_file` you had provided.
 #### Probabilities in barplot
-The barplot will be saved on `scAI_SNP/output/figure/probabilities.jpg` and will show a probability bar plot. In the x-axis, represented are the 26 population groups, which are also colored based on which continent (African, American, East Asian, European, and South Asian) the group is from. As mentioned before, the number of samples should not exceed 8 as the plot does not scale well with high number of samples. You may generate your own plot using the probability text file.
+The barplot will be saved on `<output_directory>/barplot_probabilities.jpg` and will show a probability bar plot. In the x-axis, represented are the 26 population groups, which are also colored based on which continent (African, American, East Asian, European, and South Asian) the group is from. As mentioned before, the number of samples should not exceed 8 as the plot does not scale well with high number of samples. You may generate your own plot using the probability text file.
 
 ## generating genotype input file
 
