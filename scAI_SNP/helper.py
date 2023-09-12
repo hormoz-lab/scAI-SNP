@@ -24,6 +24,29 @@ def cmd_center(args=None):
 	parsed_args = parser.parse_args(args)
 	print(center(parsed_args.x, parsed_args.y))
 
+# a function that checks if a string is a valid path
+def is_valid_path(path_str):
+	invalid_chars = set('<>:|?"*')
+	return bool(path_str) and not any(ch in invalid_chars for ch in path_str)
+
+# a function that ensures a directory exists
+def ensure_directory_exists(path_str):
+	print(f"NOTE: Output directory '{path_str}' will be created if it does not exist.")
+	if not is_valid_path(path_str):
+		raise ValueError(f"'{path_str}' is not a valid path string.")
+
+	if not os.path.exists(path_str):
+		os.makedirs(path_str)
+		print(f"NOTE: Output directory '{path_str}' created.")
+	else:
+		print(f"NOTE: Output directory '{path_str}' already exists.")
+
+# a function that ensures a path ends with a slash
+def ensure_trailing_slash(path):
+    if not path.endswith('/'):
+        return path + '/'
+    return path
+
 # a function that reads a file
 def read_validate(file):
 	print(f"reading input file from {file}")
@@ -128,7 +151,8 @@ def get_name_input(input, name_input, n_sample):
 		vec_name_input = df_string.iloc[:n_sample, 0].to_list()
 	return vec_name_input
 
-def save_prob_plot(df_prob, vec_name_input, n_sample):
+# a function that saves the plot of the input
+def save_prob_plot(df_prob, vec_name_input, n_sample, path_output):
 	# data objects needed for plotting
 	vec_pop_ordered = ['ACB','ASW','ESN','GWD','LWK',
 					'MSL','YRI','CLM','MXL','PEL',
@@ -197,7 +221,7 @@ def save_prob_plot(df_prob, vec_name_input, n_sample):
 	ax.add_artist(legend_box)
 	
 	plt.tight_layout()
-	path_plot = 'output/figure/'
-	plt.savefig(path_plot + 'probabilities.jpg', bbox_inches = 'tight', pad_inches = 0.5)
+	path_plot = ensure_trailing_slash(path_output)
+	plt.savefig(path_plot + 'barplot_probabilities.jpg', bbox_inches = 'tight', pad_inches = 0.5)
 	# plt.show()
 	print("SUCCESS: plot saved!")

@@ -4,13 +4,9 @@ import numpy as np
 import pandas as pd
 import time
 
-from scAI_SNP.helper import read_center
-from scAI_SNP.helper import read_validate
-from scAI_SNP.helper import center_scale_input
-from scAI_SNP.helper import get_name_input
-from scAI_SNP.helper import save_prob_plot
+from scAI_SNP.helper import (read_center, read_validate, center_scale_input, get_name_input, save_prob_plot,
+							 ensure_directory_exists, n_mut, is_valid_path, ensure_trailing_slash)
 
-n_mut = 4586890
 
 app = typer.Typer(
 	help = "Command line tool to extract genetic population classification of mutation data "
@@ -18,11 +14,14 @@ app = typer.Typer(
 )
 
 @app.command(short_help="classify the data")
-def classify(file_input, name_input = None, bool_save_plot = True):
+def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	now = time.time()
 	print(f"starting ancestry classification for scAI-SNP")
 	print(f"python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
 	print(f"input file path: {file_input}")	
+
+	# ensure the output directory exists and creates it if needed
+	ensure_directory_exists(path_output)
 
 	# read the input data
 	mat_input = read_validate(file_input)
@@ -75,11 +74,11 @@ def classify(file_input, name_input = None, bool_save_plot = True):
 
 	df_prob = pd.DataFrame(prob.T, index = vec_population, columns = vec_name_input)
 	print(f"saving probabilities to output/probabilities.tsv")
-	df_prob.to_csv(sep = '\t', path_or_buf = 'output/probabilities.tsv', index = True)
+	df_prob.to_csv(sep = '\t', path_or_buf = ensure_trailing_slash(path_output) + 'df_probabilities.tsv', index = True)
 	print("SUCCESS: probabilities saved!")
 
 	if (bool_save_plot):
-		save_prob_plot(df_prob, vec_name_input, n_sample)
+		save_prob_plot(df_prob, vec_name_input, n_sample, path_output)
 	return df_prob
 
 
@@ -91,11 +90,12 @@ def cmd_classify(args=None):
 	
 	# required arguments
 	parser.add_argument('file_input', help = "input genotype file path")
+	parser.add_argument('path_output', help = "output genotype folder path")
 	
 	# optional arguments
 	parser.add_argument('--name_input', default = None, help= "input sample names (file path) (default: None).")
-	parser.add_argument('--bool_save_plot', type = bool, default=True, help = "Flag to save plot (default: True).")
+	parser.add_argument('--bool_save_plot', type = bool, default = True, help = "Flag to save plot (default: True).")
 
 	parsed_args = parser.parse_args(args)
 	
-	classify(parsed_args.file_input, parsed_args.name_input, parsed_args.bool_save_plot)
+	classify(parsed_args.file_input, parsed_args.path_output, parsed_args.name_input, parsed_args.bool_save_plot)
