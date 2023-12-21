@@ -2,6 +2,7 @@ import sys
 import typer
 import numpy as np
 import pandas as pd
+import cvxpy as cp
 import time
 
 from scAI_SNP.helper import (read_center, read_validate, center_scale_input, get_name_input, save_prob_plot,
@@ -43,19 +44,30 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	print(f"each sample is missing {np.around(vec_n_missing/n_mut * 100, 2)} % genotypes")
 	print("SUCCESS: centering complete!")
 	
+ 	## original
 	print("reading LDA projection matrix...")
 	mat_proj_lda = pd.read_csv('data/proj_lda.tsv.gz', sep = '\t', compression = 'gzip', header = None).values
 	print("SUCCESS: projection matrix loaded!")
 	print("applying classification...")
+ 
+ 	## new
+ 	print("reading PCA projection matrix...")
+	# mat_proj_pca = pd.read_csv('data/proj_pca.tsv.gz', sep = '\t', compression = 'gzip', header = None).values
+	print("SUCCESS: PCA projection matrix loaded!")
+	print("applying classification...")
 	
+ 	## original
 	lda_proj_input = mat_input_centered_scaled.T @ mat_proj_lda
-	
+	## new
+ 	# pca_projected_input = mat_input_centered_scaled.T @ mat_proj_pca
+ 
+	## original
 	coef_lr = pd.read_csv('model/LR/LR_coef.tsv', sep = '\t', header = None).to_numpy()
 	intercept_lr = pd.read_csv('model/LR/LR_intercept.tsv', sep = '\t', header = None).to_numpy()
 	vec_population = pd.read_csv('model/LR/population.tsv', header = None).to_numpy().flatten()
 	
 	scores = lda_proj_input @ coef_lr.T + intercept_lr.T
-	# scores = scores.to_numpy()
+	
 	print(f"scores dimension: {scores.shape}")
 	index_max = np.argmax(scores, axis = 1)
 	prob = np.exp(scores) / np.sum(np.exp(scores), axis = 1, keepdims = True)
@@ -64,7 +76,9 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 		print(f"For sample {sample + 1}:")
 		print(f"classified population: {vec_population[index_max[sample]]}")
 		print(f"prob: {prob[sample, index_max[sample]]}")
-
+	## new
+	# under construction
+ 
 	print("SUCCESS: classification done!")
 	print(f"classify took {round((time.time() - now)/60, 2)} minutes")
 	print("plotting and saving probabilities...")

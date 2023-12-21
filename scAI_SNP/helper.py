@@ -10,20 +10,6 @@ n_mut = 4586890
 
 #@returns(int)
 
-def div_int(x, y):
-    return x / y
-
-def center(x, y):
-	return round(x - y, 2)
-
-def cmd_center(args=None):
-	import argparse
-	parser = argparse.ArgumentParser()
-	parser.add_argument('x', type=float)
-	parser.add_argument('y', type=float)
-	parsed_args = parser.parse_args(args)
-	print(center(parsed_args.x, parsed_args.y))
-
 # a function that checks if a string is a valid path
 def is_valid_path(path_str):
 	invalid_chars = set('<>:|?"*')
