@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import cvxpy as cp
 import time
+import pyarrow
 
 from scAI_SNP.helper import (read_center, read_validate, center_scale_input, get_name_input, save_prob_plot,
 							 ensure_directory_exists, n_mut, is_valid_path, ensure_trailing_slash)
@@ -49,36 +50,41 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	# mat_proj_lda = pd.read_csv('data/proj_lda.tsv.gz', sep = '\t', compression = 'gzip', header = None).values
 	# print("SUCCESS: projection matrix loaded!")
 	# print("applying classification...")
-	
- 	## new
-	print("reading PCA projection matrix...")
-	print(f"cp version: {cp.__version__}")
-	# mat_proj_pca = pd.read_csv('data/proj_pca.tsv.gz', sep = '\t', compression = 'gzip', header = None).values
-	mat_proj_pca = pd.read_csv(f'data/proj_PCA/mat_proj_PCA_cc1.tsv.gz', compression = 'gzip', sep = '\t', header = None).values
-	print(f'shape of mat_proj_pca (4.5M by 100): {mat_proj_pca.shape}')
-	print("SUCCESS: PCA projection matrix loaded!")
-
-	
- 	## original
-	# lda_proj_input = mat_input_centered_scaled.T @ mat_proj_lda
-	## new
- 
+	 
 	print("reading mean PCA matrix...")
 	mat_mean_PC = pd.read_csv(f'data/mat_GT_PCA_projected_mean.tsv', sep = '\t', header = None).values
-	mat_mean_PC = mat_mean_PC[0:100,:]	
-	print(f'shape of mat_mean_P (100 by 26): {mat_mean_PC.shape}')
+	mat_mean_PC = mat_mean_PC[0:700,:]	
+	print(f'shape of mat_mean_P (700 by 26): {mat_mean_PC.shape}')
 	print("SUCCESS: mean PCA matrix loaded!")
- 
+
+	list_pca_projected_input = []
+	now = time.time()
+	print(f'version of pyarrow: {pyarrow.__version__}')
+	for index_PC in range(1, 7 + 1):
+		print("reading PCA projection matrix...")
+		# tsv.gz
+		# mat_proj_pca = pd.read_csv(f'data/proj_PCA/mat_proj_PCA_cc{index_PC}_2s.tsv.gz', 
+        #                      compression = 'gzip', sep = '\t', header = None).values
+		# parquet.gz
+		mat_proj_pca = pd.read_parquet(
+			f'data/proj_PCA/mat_proj_PCA_cc{index_PC}_2s.parquet', 
+			engine = 'pyarrow').values
+		print(f'shape of mat_proj_pca (4.5M by 100): {mat_proj_pca.shape}')
+		print(f"SUCCESS: PCA projection matrix loaded! ({index_PC}/7)")	
 	
-	print("applying PCA...")
-	print(f'shape of mat_input_centered_scaled (4.5M by n_sample): {mat_input_centered_scaled.shape}')
-	pca_projected_input = mat_input_centered_scaled.T @ mat_proj_pca
-	print("SUCCESS: PCA applied!")
- 
+		print("applying PCA...")
+		print(f'shape of mat_input_centered_scaled (4.5M by n_sample): {mat_input_centered_scaled.shape}')
+		list_pca_projected_input.append(mat_input_centered_scaled.T @ mat_proj_pca)
+		print(f"SUCCESS: PCA applied for ({index_PC}/7)")
+		print(f"PCA ({index_PC}/7) took {round((time.time() - now)/60, 2)} minutes")
+
+	pca_projected_input = np.concatenate(list_pca_projected_input, axis = 1)
+	print(f"shape of pca_projected_input: {pca_projected_input.shape}")
+
 	## original
 	# coef_lr = pd.read_csv('model/LR/LR_coef.tsv', sep = '\t', header = None).to_numpy()
 	# intercept_lr = pd.read_csv('model/LR/LR_intercept.tsv', sep = '\t', header = None).to_numpy()
-	# vec_population = pd.read_csv('model/LR/population.tsv', header = None).to_numpy().flatten()
+	vec_population = pd.read_csv('model/population.tsv', header = None).to_numpy().flatten()
 	
 	# scores = lda_proj_input @ coef_lr.T + intercept_lr.T
 	
@@ -135,6 +141,8 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	print(f"saving probabilities to output/probabilities.tsv")
 	df_prob.to_csv(sep = '\t', path_or_buf = ensure_trailing_slash(path_output) + 'df_probabilities.tsv', index = True)
 	print("SUCCESS: probabilities saved!")
+	pd.DataFrame({'angle': list_angle}, index = vec_name_input).to_csv(f'{path_output}cos_angle.tsv', 
+                                                                    index = True, sep = '\t')
 
 	if (bool_save_plot):
 		save_prob_plot(df_prob, vec_name_input, n_sample, path_output)
