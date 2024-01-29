@@ -20,7 +20,7 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	now = time.time()
 	print(f"starting ancestry classification for scAI-SNP")
 	print(f"python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
-	print(f"input file path: {file_input}")	
+	print(f"input file path: {file_input}")
 
 	# ensure the output directory exists and creates it if needed
 	ensure_directory_exists(path_output)
@@ -52,15 +52,16 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	# print("applying classification...")
 	 
 	print("reading mean PCA matrix...")
+	n_PC = 600
 	mat_mean_PC = pd.read_csv(f'data/mat_GT_PCA_projected_mean.tsv', sep = '\t', header = None).values
-	mat_mean_PC = mat_mean_PC[0:700,:]	
-	print(f'shape of mat_mean_P (700 by 26): {mat_mean_PC.shape}')
+	mat_mean_PC = mat_mean_PC[0:n_PC,:]	
+	print(f'shape of mat_mean_P ({n_PC} by 26): {mat_mean_PC.shape}')
 	print("SUCCESS: mean PCA matrix loaded!")
 
 	list_pca_projected_input = []
 	now = time.time()
 	print(f'version of pyarrow: {pyarrow.__version__}')
-	for index_PC in range(1, 7 + 1):
+	for index_PC in range(1, n_PC/100 + 1):
 		print("reading PCA projection matrix...")
 		# tsv.gz
 		# mat_proj_pca = pd.read_csv(f'data/proj_PCA/mat_proj_PCA_cc{index_PC}_2s.tsv.gz', 
@@ -70,13 +71,13 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 			f'data/proj_PCA/mat_proj_PCA_cc{index_PC}_2s.parquet', 
 			engine = 'pyarrow').values
 		print(f'shape of mat_proj_pca (4.5M by 100): {mat_proj_pca.shape}')
-		print(f"SUCCESS: PCA projection matrix loaded! ({index_PC}/7)")	
+		print(f"SUCCESS: PCA projection matrix loaded! ({index_PC}/{n_PC/100})")	
 	
 		print("applying PCA...")
 		print(f'shape of mat_input_centered_scaled (4.5M by n_sample): {mat_input_centered_scaled.shape}')
 		list_pca_projected_input.append(mat_input_centered_scaled.T @ mat_proj_pca)
-		print(f"SUCCESS: PCA applied for ({index_PC}/7)")
-		print(f"PCA ({index_PC}/7) took {round((time.time() - now)/60, 2)} minutes")
+		print(f"SUCCESS: PCA applied for ({index_PC}/{n_PC/100})")
+		print(f"PCA ({index_PC}/{n_PC/100}) took {round((time.time() - now)/60, 2)} minutes")
 
 	pca_projected_input = np.concatenate(list_pca_projected_input, axis = 1)
 	print(f"shape of pca_projected_input: {pca_projected_input.shape}")
