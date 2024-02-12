@@ -112,7 +112,7 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 		prob = np.array(list_predicted)
 
 	df_prob = pd.DataFrame(prob.T, index = vec_population, columns = vec_name_input)
-	print(f"saving probabilities to output/probabilities.tsv")
+	print(f"saving probabilities to {ensure_trailing_slash(path_output)}probabilities.tsv")
 	df_prob.to_csv(sep = '\t', path_or_buf = ensure_trailing_slash(path_output) + 'df_probabilities.tsv', index = True)
 	print("SUCCESS: probabilities saved!")
 	pd.DataFrame(
