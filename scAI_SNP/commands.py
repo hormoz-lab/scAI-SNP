@@ -1,4 +1,5 @@
 import sys
+import importlib
 import typer
 import numpy as np
 import pandas as pd
@@ -21,6 +22,19 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	print(f"starting ancestry classification for scAI-SNP")
 	print(f"python version: {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
 	print(f"input file path: {file_input}")
+ 
+	# check the versions for packages in the requirements.txt
+	vec_package = ['pandas', 'numpy', 'scipy', 'matplotlib', 'typer',
+                'cvxpy', 'traitlets', 'jupyter-core', 'ipykernel', 'pyarrow']
+	
+	for p in vec_package:
+		try:
+			pkg = importlib.import_module(p)
+			print(f'{p}: {pkg.__version__}')
+		except ImportError:
+			print(f'{p}: Not installed')
+		except AttributeError:
+			print(f'{p}: Version info not available')
 
 	# ensure the output directory exists and creates it if needed
 	ensure_directory_exists(path_output)
