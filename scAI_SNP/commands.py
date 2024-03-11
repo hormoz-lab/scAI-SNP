@@ -85,7 +85,7 @@ def classify(file_input, path_output, name_input = None, bool_save_plot = True):
 	pca_projected_input = np.concatenate(list_pca_projected_input, axis = 1)
 	print(f"shape of pca_projected_input: {pca_projected_input.shape}")
 
-	vec_population = pd.read_csv('model/population.tsv', header = None).to_numpy().flatten()
+	vec_population = pd.read_csv('data/population.tsv', header = None).to_numpy().flatten()
 	 
 	def predict_convex(test_vec, mean_vectors = mat_mean_PC):
 		# Define the optimization variable
