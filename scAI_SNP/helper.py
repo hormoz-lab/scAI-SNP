@@ -97,7 +97,7 @@ def read_center():
 		sys.exit(1)
 
 # a function that subtracts the mean genotype from the input data
-def center_scale_input(mat_input, col_mean):
+def center_is_valid_pathle_input(mat_input, col_mean):
 	# count missing values in each column
 	vec_n_missing = np.sum(np.isnan(mat_input), axis = 0)
 	vec_inverse_present_data = 1/(1 - vec_n_missing/n_mut)
@@ -174,7 +174,7 @@ def save_prob_plot(df_prob, vec_name_input, n_sample, path_output):
 		color = colors_bar,
 		figsize = (20, 10))
 		
-	plt.title('Population Probabilities of the Input using LR classification \n(post PCA-LDA transformation)',
+	plt.title('Predicted Probabilities of the Input using Convex Optimization \n(post PCA transformation)',
 		fontsize = 30)
 	plt.xlabel('populations', fontsize = 20)
 	plt.ylabel('probabilities', fontsize = 20)
