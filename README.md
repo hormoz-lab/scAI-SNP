@@ -13,7 +13,7 @@ Because this repository includes large files (over 100MB), do not git-clone this
 
 ### Step 1: installation of scAI-SNP
 
-use a wget/curl to install the repository
+Use a wget/curl to install the repository
 
 ```{bash}
 wget <dropbox_link>#TODO
@@ -23,22 +23,22 @@ pip install .
 
 ### Step 2: testing installation
 
-use the following command to test the installation was done successfully.
+Use the following command to test the installation was done successfully.
 
 old link to dropbox [link](https://www.dropbox.com/sh/t8asohtbg6y8y8i/AABgztiVy4LlZ5DEwR4UZLi_a?dl=0).#TODO
 
 ## Ancestry-inference
 ### Overview
-the inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper `<link it here>#TODO`
+The inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper `<link it here>#TODO`
 
 #### Data-processing
-the data will be centered by the mean genotype of the training data such that all the missing genotypes will be non-informative to the model and that the other genotypes are centerred appropriatly for the subsequent steps. The data will also be scaled by multiplying a scalar, inverse of the proportion of present genotype data (if only 10% genotypes are present in the input, the components will be multiplied by `1/0.1` or `10` to account for missing data). 
+The data will be centered by the mean genotype of the training data such that all the missing genotypes will be non-informative to the model and that the other genotypes are centerred appropriatly for the subsequent steps. The data will also be scaled by multiplying a scalar, inverse of the proportion of present genotype data (if only 10% genotypes are present in the input, the components will be multiplied by `1/0.1` or `10` to account for missing data). 
 
-#### Dimension reduction
-the centered data will also be going through dimension reduction through PCA, condensing 4.5M rows of data into 600 rows by using the first 600 PCs. The model was created using the training dataset and this github repository conducts the dimension reduction by multiplying the centered input by the composite projection matrix that would transform the input data using PCA.
+#### Dimensionality reduction
+The centered data will also be going through dimensionality reduction through PCA, condensing 4.5M rows of data into 600 rows by using the first 600 PCs. The model was created using the training dataset and this github repository conducts the dimensionality reduction by multiplying the centered input by the composite projection matrix that would transform the input data using PCA.
 
 #### Inference
-the reduced dimensions would then be applied to a logistic regression model that outputs the probabilities that the sample belongs to any of the 26 groups.
+The reduced dimensions would then be applied to a logistic regression model that outputs the probabilities that the sample belongs to any of the 26 groups.
 
 ### Command line interface
 ```{bash}
