@@ -7,13 +7,13 @@
 
 Because this repository includes large files (over 100MB), do not git-clone this repository. Instead, we provide a dropbox link for the user to download our repository. This repository that you see in GitLab will have files without the data files needed for inference.
 
-### Step 0: Make sure you have the prerequisites 
+### Prerequisites 
 - pip
 - python 3.7+
 
-### Step 1: installation of scAI-SNP
+### Guide
 
-Use a wget/curl to install the repository
+Use a wget/curl to install the repository from this [link](/cristealab/shong/project_nowak_spatial_sahand/script/save_regress/woTSmixed)
 
 ```{bash}
 wget <dropbox_link>#TODO
@@ -21,15 +21,9 @@ cd scAI_SNP
 pip install .
 ```
 
-### Step 2: testing installation
-
-Use the following command to test the installation was done successfully.
-
-old link to dropbox [link](https://www.dropbox.com/sh/t8asohtbg6y8y8i/AABgztiVy4LlZ5DEwR4UZLi_a?dl=0).#TODO
-
 ## Ancestry-inference
 ### Overview
-The inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper `<link it here>#TODO`
+The inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper.
 
 #### Data-processing
 The data will be centered by the mean genotype of the training data such that all the missing genotypes will be non-informative to the model and that the other genotypes are centerred appropriatly for the subsequent steps. The data will also be scaled by multiplying a scalar, inverse of the proportion of present genotype data (if only 10% genotypes are present in the input, the components will be multiplied by `1/0.1` or `10` to account for missing data). 
@@ -38,13 +32,13 @@ The data will be centered by the mean genotype of the training data such that al
 The centered data will also be going through dimensionality reduction through PCA, condensing 4.5M rows of data into 600 rows by using the first 600 PCs. The model was created using the training dataset and this github repository conducts the dimensionality reduction by multiplying the centered input by the composite projection matrix that would transform the input data using PCA.
 
 #### Inference
-The reduced dimensions would then be applied to a logistic regression model that outputs the probabilities that the sample belongs to any of the 26 groups.
+The reduced dimensions would then be applied to a convex optimization model that outputs the probabilities that the sample belongs to any of the 26 groups.
 
 ### Command line interface
 ```{bash}
 scAI_SNP_classify <input_genotype_file> <output_directory> --name_input <input_name_file> --bool_save_plot <True or False>
 ```
-running the command above would produce probabilities of the samples belonging into the 26 groups. The `name_input` and `bool_save_plot` are optional parameters but you must provide the `input_genotype_file`
+Running the command above would produce probabilities of the samples belonging into the 26 groups. The `name_input` and `bool_save_plot` are optional parameters but you must provide the `input_genotype_file`
 
 ### File Format
 #### <input_genotype_file>
@@ -67,7 +61,7 @@ The output will be saved on your given `<output_directory>` and there are one or
 #### Probabilities in barplot
 The barplot will be saved on `<output_directory>/barplot_probabilities.jpg` and will show a probability bar plot. In the x-axis, represented are the 26 population groups, which are also colored based on which continent (African, American, East Asian, European, and South Asian) the group is from. As mentioned before, the number of samples should not exceed 8 as the plot does not scale well with high number of samples. You may generate your own plot using the probability text file.
 
-## generating genotype input file
+## Generating genotype input file
 
 [SComatic](https://github.com/cortes-ciriano-lab/SComatic) is a github repository that enables users to extract genotypes of germline mutations (and also somatic mutations) which are required for this package. Please refer to this github [link](https://github.com/cortes-ciriano-lab/SComatic/blob/main/docs/OtherFunctionalities.md#computing-germline-genotypes-for-known-variants-in-single-cell-datasets) if you need its further assistance.
 
