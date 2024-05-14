@@ -13,17 +13,17 @@ Because this repository includes large files (over 100MB), do not git-clone this
 
 ### Guide
 
-Use a wget/curl to install the repository from this [link](/cristealab/shong/project_nowak_spatial_sahand/script/save_regress/woTSmixed)
+Use a wget/curl to install the repository using this [link](ftp://ftp.dfci.harvard.edu/pub/scAI-SNP). Example code below:
 
 ```{bash}
-wget <dropbox_link>#TODO
+wget -rnH --cut-dirs=1 ftp://ftp.dfci.harvard.edu/pub/scAI-SNP
 cd scAI_SNP
 pip install .
 ```
 
 ## Ancestry-inference
 ### Overview
-The inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimension reduction, and classification prediction. More details can be found on the paper.
+The inference will take a column or columns of 4.5 million genotypes and conduct necssary data-processing, dimensionality reduction, and classification prediction. More details can be found on the paper.
 
 #### Data-processing
 The data will be centered by the mean genotype of the training data such that all the missing genotypes will be non-informative to the model and that the other genotypes are centerred appropriatly for the subsequent steps. The data will also be scaled by multiplying a scalar, inverse of the proportion of present genotype data (if only 10% genotypes are present in the input, the components will be multiplied by `1/0.1` or `10` to account for missing data). 
