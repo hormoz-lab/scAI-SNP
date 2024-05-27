@@ -1,0 +1,67 @@
+Sample	Donor	Tissue_type	Age	Sex	Ethnicity
+colon_sigmoid_SM-JF1O8	Donor 1	sigmoid colon	37	Male	White
+artery_aorta_SM-C1PX3	Donor 1	thoracic aorta	37	Male	White
+esophagus_muscularis_SM-A8CPH	Donor 1	esophagus muscularis mucosa	37	Male	White
+pancreas_SM-JF1O6	Donor 1	body of pancreas	37	Male	White
+lung_SM-ACCPU	Donor 1	upper lobe of left lung	37	Male	White
+adipose_omentum_SM-CSSD4	Donor 1	omental fat pad	37	Male	White
+colon_transverse_SM-ACCQ1	Donor 1	transverse colon	37	Male	White
+stomach_SM-JF1NP	Donor 1	stomach	37	Male	White
+skin_sun_exposed_SM-IQYCP	Donor 1	lower leg skin	37	Male	White
+pancreas_SM-JF1NS	Donor 2	body of pancreas	54	Male	White
+esophagus_muscularis_SM-IQYD1	Donor 2	esophagus muscularis mucosa	54	Male	White
+artery_tibial_SM-CHLWW	Donor 2	tibial artery	54	Male	White
+colon_transverse_SM-CSSDA	Donor 2	transverse colon	54	Male	White
+nerve_tibial_SM-CHLWU	Donor 2	tibial nerve	54	Male	White
+lung_SM-A62E9	Donor 2	upper lobe of left lung	54	Male	White
+stomach_SM-CHLWL	Donor 2	stomach	54	Male	White
+esophagus_mucosa_SM-AZPYJ	Donor 2	esophagus squamous epithelium	54	Male	White
+artery_aorta_SM-CR89M	Donor 2	thoracic aorta	54	Male	White
+thyroid_SM-C1MKY	Donor 2	thyroid gland	54	Male	White
+skin_sun_exposed_SM-JF1NT	Donor 2	lower leg skin	54	Male	White
+small_intestine_SM-ADA5F	Donor 2	Peyer's patch	54	Male	White
+adipose_omentum_SM-CHZRM	Donor 2	omental fat pad	54	Male	White
+muscle_SM-C1MKW	Donor 2	gastrocnemius medialis	54	Male	White
+adipose_omentum_SM-ADYHB	Donor 3	omental fat pad	51	Female	Asian
+pancreas_SM-ADRUQ	Donor 3	body of pancreas	51	Female	Asian
+skin_SM-JF1O1	Donor 3	suprapubic skin	51	Female	Asian
+muscle_SM-C1PWV	Donor 3	gastrocnemius medialis	51	Female	Asian
+mammary_tissue_SM-JF1NV	Donor 3	breast epithelium	51	Female	Asian
+artery_aorta_SM-JF1NU	Donor 3	ascending aorta	51	Female	Asian
+esophagus_mucosa_SM-A9VPA	Donor 3	esophagus squamous epithelium	51	Female	Asian
+colon_transverse_SM-A9VP4	Donor 3	transverse colon	51	Female	Asian
+esophagus_muscularis_SM-CSSCV	Donor 3	esophagus muscularis mucosa	51	Female	Asian
+heart_lv_SM-JF1NY	Donor 3	heart left ventricle	51	Female	Asian
+heart_atrial_appendage_SM-JF1NX	Donor 3	right atrium auricular region	51	Female	Asian
+skin_sun_exposed_SM-ADYHK	Donor 3	lower leg skin	51	Female	Asian
+stomach_SM-JF1O3	Donor 3	stomach	51	Female	Asian
+nerve_tibial_SM-CP2V6	Donor 3	tibial nerve	51	Female	Asian
+lung_SM-JF1NZ	Donor 3	upper lobe of left lung	51	Female	Asian
+thyroid_SM-JF1O4	Donor 3	thyroid gland	51	Female	Asian
+adipose_omentum_SM-IOBHJ	Donor 4	omental fat pad	53	Female	Asian
+artery_aorta_SM-C1MLC	Donor 4	ascending aorta	53	Female	Asian
+pancreas_SM-IOBHS	Donor 4	body of pancreas	53	Female	Asian
+colon_sigmoid_SM-AZPYO	Donor 4	sigmoid colon	53	Female	Asian
+colon_transverse_SM-BZ2ZS	Donor 4	transverse colon	53	Female	Asian
+adrenal_gland_SM-A8WNO	Donor 4	adrenal gland	53	Female	Asian
+stomach_SM-IOBHV	Donor 4	stomach	53	Female	Asian
+esophagus_ge_junction_SM-IOERG	Donor 4	gastroesophageal sphincter	53	Female	Asian
+heart_lv_SM-IOBHO	Donor 4	heart left ventricle	53	Female	Asian
+muscle_SM-ADA6L	Donor 4	gastrocnemius medialis	53	Female	Asian
+colon_transverse_SM-A9HOW	Donor 4	transverse colon	53	Female	Asian
+thyroid_SM-IOBHW	Donor 4	thyroid gland	53	Female	Asian
+mammary_tissue_SM-IOBHL	Donor 4	breast epithelium	53	Female	Asian
+ovary_SM-IOBHR	Donor 4	ovary	53	Female	Asian
+skin_SM-IOBHT	Donor 4	suprapubic skin	53	Female	Asian
+lung_SM-A8WNH	Donor 4	upper lobe of left lung	53	Female	Asian
+artery_tibial_SM-IOBHK	Donor 4	tibial artery	53	Female	Asian
+esophagus_mucosa_SM-A9HOR	Donor 4	esophagus squamous epithelium	53	Female	Asian
+muscle_SM-IOBHP	Donor 4	gastrocnemius medialis	53	Female	Asian
+esophagus_muscularis_SM-IOBHM	Donor 4	esophagus muscularis mucosa	53	Female	Asian
+heart_atrial_appendage_SM-IOBHN	Donor 4	right atrium auricular region	53	Female	Asian
+liver_SM-A8WNZ	Donor 4	right lobe of liver	53	Female	Asian
+nerve_tibial_SM-IOBHQ	Donor 4	tibial nerve	53	Female	Asian
+skin_sun_exposed_SM-IOBHU	Donor 4	lower leg skin	53	Female	Asian
+vagina_SM-A9HOS	Donor 4	vagina	53	Female	Asian
+small_intestine_SM-A62GO	Donor 4	Peyer's patch	53	Female	Asian
+uterus_SM-IOBHX	Donor 4	uterus	53	Female	Asian

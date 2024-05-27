@@ -1,0 +1,79 @@
+Sample	Donor	Sex	Age	EthnicOrigin	region	region.organ_part
+CBTM-361B_LV	D1	Female	50-55	Caucasian	LV	heart left ventricle
+CBTM-361B_RV	D1	Female	50-55	Caucasian	RV	heart right ventricle
+CBTM-361B_LA	D1	Female	50-55	Caucasian	LA	left cardiac atrium
+CBTM-361B_AX	D1	Female	50-55	Caucasian	AX	apex of heart
+CBTM-473C_LV	D11	Female	60-65	Caucasian	LV	heart left ventricle
+CBTM-473C_RV	D11	Female	60-65	Caucasian	RV	heart right ventricle
+CBTM-473C_LA	D11	Female	60-65	Caucasian	LA	left cardiac atrium
+CBTM-473C_RA	D11	Female	60-65	Caucasian	RA	right cardiac atrium
+CBTM-473C_SP	D11	Female	60-65	Caucasian	SP	interventricular septum
+CBTM-473C_AX	D11	Female	60-65	Caucasian	AX	apex of heart
+CBTM-362C_LV	D2	Male	60-65	Caucasian	LV	heart left ventricle
+CBTM-362C_RV	D2	Male	60-65	Caucasian	RV	heart right ventricle
+CBTM-362C_LA	D2	Male	60-65	Caucasian	LA	left cardiac atrium
+CBTM-362C_AX	D2	Male	60-65	Caucasian	AX	apex of heart
+CBTM-362C_SP	D2	Male	60-65	Caucasian	SP	interventricular septum
+CBTM-362C_RA	D2	Male	60-65	Caucasian	RA	right cardiac atrium
+CBTM-364B_LA	D3	Male	55-60	Caucasian	LA	left cardiac atrium
+CBTM-364B_SP	D3	Male	55-60	Caucasian	SP	interventricular septum
+CBTM-364B_RV	D3	Male	55-60	Caucasian	RV	heart right ventricle
+CBTM-364B_RA	D3	Male	55-60	Caucasian	RA	right cardiac atrium
+CBTM-364B_AX	D3	Male	55-60	Caucasian	AX	apex of heart
+CBTM-364B_LV	D3	Male	55-60	Caucasian	LV	heart left ventricle
+CBTM-386C_RV	D4	Female	70-75	Caucasian	RV	heart right ventricle
+CBTM-386C_AX	D4	Female	70-75	Caucasian	AX	apex of heart
+CBTM-386C_LA	D4	Female	70-75	Caucasian	LA	left cardiac atrium
+CBTM-386C_RA	D4	Female	70-75	Caucasian	RA	right cardiac atrium
+CBTM-386C_LV	D4	Female	70-75	Caucasian	LV	heart left ventricle
+CBTM-386C_SP	D4	Female	70-75	Caucasian	SP	interventricular septum
+CBTM-390C_LV	D5	Female	65-70	Caucasian	LV	heart left ventricle
+CBTM-390C_SP	D5	Female	65-70	Caucasian	SP	interventricular septum
+CBTM-390C_RV	D5	Female	65-70	Caucasian	RV	heart right ventricle
+CBTM-390C_LA	D5	Female	65-70	Caucasian	LA	left cardiac atrium
+CBTM-390C_AX	D5	Female	65-70	Caucasian	AX	apex of heart
+CBTM-390C_RA	D5	Female	65-70	Caucasian	RA	right cardiac atrium
+CBTM-417C_AX	D6	Male	70-75	Caucasian	AX	apex of heart
+CBTM-417C_RV	D6	Male	70-75	Caucasian	RV	heart right ventricle
+CBTM-417C_LV	D6	Male	70-75	Caucasian	LV	heart left ventricle
+CBTM-417C_LA	D6	Male	70-75	Caucasian	LA	left cardiac atrium
+CBTM-417C_RA	D6	Male	70-75	Caucasian	RA	right cardiac atrium
+CBTM-417C_SP	D6	Male	70-75	Caucasian	SP	interventricular septum
+CBTM-423C_LV	D7	Male	60-65	Caucasian	LV	heart left ventricle
+CBTM-423C_SP	D7	Male	60-65	Caucasian	SP	interventricular septum
+CBTM-423C_RV	D7	Male	60-65	Caucasian	RV	heart right ventricle
+CBTM-423C_LA	D7	Male	60-65	Caucasian	LA	left cardiac atrium
+CBTM-423C_RA	D7	Male	60-65	Caucasian	RA	right cardiac atrium
+CBTM-423C_AX	D7	Male	60-65	Caucasian	AX	apex of heart
+H0026_LV	H2	Male	50-55	Caucasian	LV	heart left ventricle
+H0026_LA	H2	Male	50-55	Caucasian	LA	left cardiac atrium
+H0026_SP	H2	Male	50-55	Caucasian	SP	interventricular septum
+H0026_AX	H2	Male	50-55	Caucasian	AX	apex of heart
+H0026_RV	H2	Male	50-55	Caucasian	RV	heart right ventricle
+H0026_RA	H2	Male	50-55	Caucasian	RA	right cardiac atrium
+H0025_SP	H3	Male	50-55	Asian	SP	interventricular septum
+H0025_RV	H3	Male	50-55	Asian	RV	heart right ventricle
+H0025_RA	H3	Male	50-55	Asian	RA	right cardiac atrium
+H0025_LV	H3	Male	50-55	Asian	LV	heart left ventricle
+H0025_AX	H3	Male	50-55	Asian	AX	apex of heart
+H0025_LA	H3	Male	50-55	Asian	LA	left cardiac atrium
+H0037_SP	H4	Male	55-60	Caucasian	SP	interventricular septum
+H0037_RV	H4	Male	55-60	Caucasian	RV	heart right ventricle
+H0037_AX	H4	Male	55-60	Caucasian	AX	apex of heart
+H0037_LV	H4	Male	55-60	Caucasian	LV	heart left ventricle
+H0015_LV	H5	Female	50-55	Caucasian	LV	heart left ventricle
+H0015_SP	H5	Female	50-55	Caucasian	SP	interventricular septum
+H0015_AX	H5	Female	50-55	Caucasian	AX	apex of heart
+H0015_RA	H5	Female	50-55	Caucasian	RA	right cardiac atrium
+H0015_RV	H5	Female	50-55	Caucasian	RV	heart right ventricle
+H0020_SP	H6	Female	40-45	Caucasian	SP	interventricular septum
+H0020_AX	H6	Female	40-45	Caucasian	AX	apex of heart
+H0020_RV	H6	Female	40-45	Caucasian	RV	heart right ventricle
+H0020_LV	H6	Female	40-45	Caucasian	LV	heart left ventricle
+H0020_RA	H6	Female	40-45	Caucasian	RA	right cardiac atrium
+H0035_SP	H7	Female	45-50	Caucasian	SP	interventricular septum
+H0035_RV	H7	Female	45-50	Caucasian	RV	heart right ventricle
+H0035_AX	H7	Female	45-50	Caucasian	AX	apex of heart
+H0035_LA	H7	Female	45-50	Caucasian	LA	left cardiac atrium
+H0035_LV	H7	Female	45-50	Caucasian	LV	heart left ventricle
+H0035_RA	H7	Female	45-50	Caucasian	RA	right cardiac atrium
