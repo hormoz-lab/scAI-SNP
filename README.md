@@ -12,7 +12,7 @@ Because this repository includes large files (over 100MB), do not git-clone this
 - python 3.7+
 
 ### Guide
-
+#### Installation
 Use a wget/curl to install the repository using this [link](ftp://ftp.dfci.harvard.edu/pub/scAI-SNP). Example code below:
 
 ```{bash}
@@ -20,6 +20,13 @@ wget -rnH --cut-dirs=1 ftp://ftp.dfci.harvard.edu/pub/scAI-SNP
 cd scAI_SNP
 pip install .
 ```
+#### Verify Installation
+Use the following code after changing the working directory to `{path-to-gitlab}/scAI-SNP/` and run the following:
+```{bash}
+scAI_SNP_classify data/genotype_test_mixed.col data/result_test-installation-verify
+```
+
+The code should produce results in `data/result_test-installation-verify/` which should be identical to `data/result_test-installation/`
 
 ## Ancestry-inference
 ### Overview
