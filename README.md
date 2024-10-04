@@ -5,7 +5,7 @@
 
 ## Installation
 
-Because this repository includes large files (over 100MB), do not git-clone this repository. Instead, we provide a dropbox link for the user to download our repository. This repository that you see in GitLab will have files without the data files needed for inference.
+Because this repository includes large files (over 100MB), do not git-clone this repository. Instead, we provide a dropbox link for the user to download our repository. This repository that you see in GitHub will have files without the data files needed for inference.
 
 ### Prerequisites 
 - pip
@@ -21,7 +21,7 @@ cd scAI_SNP
 pip install .
 ```
 #### Verify Installation
-Use the following code after changing the working directory to `{path-to-gitlab}/scAI-SNP/` and run the following:
+Use the following code after changing the working directory to `{path-to-github}/scAI-SNP/` and run the following:
 ```{bash}
 scAI_SNP_classify data/genotype_test_mixed.col data/result_test-installation-verify
 ```
