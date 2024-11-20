@@ -3,6 +3,8 @@
 
 # ancestry-informative SNP (scAI-SNP)
 
+![diagram](./figure1_BMC.tif)
+
 ## Installation
 
 Because this repository includes large files (over 100MB), do not git-clone this repository. Instead, we provide a dropbox link for the user to download our repository. This repository that you see in GitHub will have files without the data files needed for inference.
