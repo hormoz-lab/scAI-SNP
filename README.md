@@ -3,7 +3,7 @@
 
 # ancestry-informative SNP (scAI-SNP)
 
-![diagram](./figure1_BMC.tif)
+![diagram](./figure1_lowres.jpg)
 
 ## Installation
 
