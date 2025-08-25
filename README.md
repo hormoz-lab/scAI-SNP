@@ -74,11 +74,5 @@ To extract the 4.5M SNP genotypes, refer to the files in `data/metadata_SNP`. Th
 ### Using cellsnp-lite
 [cellsnp-lite](https://github.com/single-cell-genetics/cellsnp-lite) is an efficient tool for genotyping bi-allelic SNPs for various data types. For a more detailed step-by-step example, please use read this [documentation](./example_cellsnp-lite.md).
 
-As stated in the github page, installation for this package is quite simple, and it is recommended to use conda to set up using cellsnp-lite.
-
-```{bash}
-conda install -c bioconda cellsnp-lite
-```
-
 ### Using SComatic
 [SComatic](https://github.com/cortes-ciriano-lab/SComatic) is a github repository that enables users to extract genotypes of germline mutations (and also somatic mutations). Please refer to this github [link](https://github.com/cortes-ciriano-lab/SComatic/blob/main/docs/OtherFunctionalities.md#computing-germline-genotypes-for-known-variants-in-single-cell-datasets) if you need its further assistance.
