@@ -21,3 +21,10 @@ __pycache__/
 # installaion
 build/
 
+# large files
+data/genotype_mean.col
+data/genotype_test_mixed.col
+data/meta_population_summarized.tsv
+data/population.tsv
+data/proj_PCA/
+data/snv_meta_4.5M.bed
