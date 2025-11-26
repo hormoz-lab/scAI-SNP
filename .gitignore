@@ -28,3 +28,4 @@ data/meta_population_summarized.tsv
 data/population.tsv
 data/proj_PCA/
 data/snv_meta_4.5M.bed
+data/mat_GT_PCA_projected_mean.tsv
